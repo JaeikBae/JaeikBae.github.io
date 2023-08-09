@@ -109,13 +109,13 @@ pagination:
 {%- endif -%}
         <h3>
         {% if post.redirect == blank %}
-          <a class="post-type" href="{{ post.url | relative_url }}">[{{ post.type }}]</a><br>
+          <a class="post-type" disabled>[{{ post.type }}]</a><br>
           <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
         {% elsif post.redirect contains '://' %}
-          <a class="post-type" href="{{ post.redirect }}" target="_blank">[{{ post.type }}]</a><br>
+        <a class="post-type" disabled>[{{ post.type }}]</a><br>
           <a class="post-title" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
         {% else %}
-          <a class="post-type" href="{{ post.url | relative_url }}">[{{ post.type }}]</a><br>
+        <a class="post-type" disabled>[{{ post.type }}]</a><br>
           <a class="post-title" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
         {% endif %}
       </h3>
