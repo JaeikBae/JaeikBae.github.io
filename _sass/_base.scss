@@ -404,6 +404,12 @@ footer.sticky-bottom {
   }
 }
 
+.section-splitter {
+  border-bottom: 3px double var(--global-divider-color);
+  text-align: left;
+  padding-top: 2rem;
+}
+
 .tag-category-list {
   border-bottom: 1px solid var(--global-divider-color);
   text-align: center;
@@ -424,6 +430,14 @@ footer.sticky-bottom {
 }
 
 .post-title {
+  mjx-container[jax="CHTML"][display="true"] {
+    display: unset;
+  }
+}
+.post-type {
+  color: var(--global-text-color-light);
+  font-size: 1rem;
+  margin-bottom: 0;
   mjx-container[jax="CHTML"][display="true"] {
     display: unset;
   }
