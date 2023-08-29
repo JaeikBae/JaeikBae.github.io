@@ -94,19 +94,32 @@ div.container-pdf {
  *****************************/
 
 div.list-groups {
-  display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  flex-direction: row;
   align-content: center;
 }
 
 div.list-group {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: flex-start;
-  margin-bottom: 2rem;
+}
+
+.list-group-body{
+  display: flex;
+}
+
+tr.list-group-contents{
+  display: contents;
+}
+
+td.list-group-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+  text-decoration: none;
+  width: 100%;
 }
 
 td.list-group-category {
@@ -122,7 +135,25 @@ td.list-group-category-icon {
 }
 
 td.list-group-name {
-  font-size: 0.8rem;
+  width: 75px;
+  height: 75px;
+  display: inline-flex;
+  border-radius: 50%;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0.5rem 1.5rem 0rem;
+  justify-content: center;
+  flex-direction: column;
+  font-family: var(--global-font-family);
+  font-weight: 600;
+}
+
+td.list-group-name img {
+  min-width: 75px;
+  min-height: 75px;
+  max-width: 75px;
+  max-height: 75px;
+  padding: 0.3rem;
 }
 
 td.list-group-level {
