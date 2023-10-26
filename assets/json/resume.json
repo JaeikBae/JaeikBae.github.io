@@ -8,7 +8,18 @@
   "volunteer": [],
   "education": [],
   "awards": [],
-  "certificates": [],
+  "certificates": [
+    {
+      "name": "정보처리기사",
+      "issuer": "한국산업인력공단",
+      "date": "2023-10-26"
+    },
+    {
+      "name": "SQLD",
+      "issuer": "한국데이터산업진흥원",
+      "date": "2023-04-14"
+    }    
+  ],
   "publications": [],
   "skills": [
     {
