@@ -72,6 +72,29 @@
       ]
     },
     {
+      "name": "Low-Light Image Object Detection",
+      "funder": "Industry-Academia Project (BWI / Korea Photonics Technology Institute)",
+      "role": "Project Leader",
+      "startDate": "2024-09",
+      "endDate": "2025-12",
+      "highlights": [
+        "Low-light image data collection and labeling",
+        "Object detection model development and fine-tuning",
+        "On-device demonstration on Qualcomm RB5 board"
+      ]
+    },
+    {
+      "name": "Self-Photography Pose Recommendation System Using Pose Estimation and Object Recognition",
+      "funder": "Course Project",
+      "role": "Project Leader",
+      "startDate": "2024-09",
+      "endDate": "2025-12",
+      "highlights": [
+        "Full-stack web system development (React, Django, MariaDB)",
+        "AI model web-based deployment and real-time service"
+      ]
+    },
+    {
       "name": "미래형자동차핵심기술전문인력양성",
       "nameEn": "Future Automotive Core Technology Professional Training Program",
       "funder": "한국산업기술진흥원 (KIAT)",
