@@ -7,6 +7,28 @@
   "education": [],
   "work": [],
   "projects": [],
-  "publications": [],
+  "publications": [
+    {
+      "name": "TDiff-HSI: Tucker-guided diffusion for high-dimensional RGB-to-HSI image generation",
+      "publisher": "Journal of Computational Design and Engineering, Oxford University Press",
+      "releaseDate": "2026-02-02",
+      "url": "https://doi.org/10.1093/jcde/qwag008",
+      "summary": "Jaeik Bae, Yong-Gu Lee"
+    },
+    {
+      "name": "BISeg: Band-Interval Selection for Explainable Hyperspectral Segmentation",
+      "publisher": "CIKM 2025 Workshop on Human-Centric AI (HCAI), COEX, Seoul, Korea",
+      "releaseDate": "2025-11-14",
+      "url": "https://xai.kaist.ac.kr/static/files/2025_hcai_workshop/paper_19.pdf",
+      "summary": "Jaeik Bae, Yong-Gu Lee"
+    },
+    {
+      "name": "R2H-Diff: Spectral-wise Diffusion for Hyperspectral Image Reconstruction from RGB and Semantic Masks",
+      "publisher": "Korean Society for Military Science and Technology Annual Conference 2025",
+      "releaseDate": "2025-06-11",
+      "url": "",
+      "summary": "Jaeik Bae, Yong-Gu Lee"
+    }
+  ],
   "awards": []
 }
