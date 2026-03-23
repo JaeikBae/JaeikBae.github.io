@@ -4,8 +4,38 @@
     "email": "jaeikb38@gm.gist.ac.kr",
     "major": "Computer Science & Artificial Intelligence"
   },
-  "education": [],
-  "work": [],
+  "education": [
+    {
+      "institution": "Gwangju Institute of Science and Technology (GIST)",
+      "area": "AI Graduate School",
+      "studyType": "Integrated M.S./Ph.D.",
+      "startDate": "2023-09",
+      "location": "Gwangju, South Korea"
+    },
+    {
+      "institution": "Yonsei University (Wonju)",
+      "area": "Computer Engineering",
+      "studyType": "B.S.",
+      "startDate": "2018-03",
+      "endDate": "2023-09",
+      "location": "Wonju, South Korea"
+    }
+  ],
+  "work": [
+    {
+      "name": "GIST Autonomous Driving Lab",
+      "position": "Integrated M.S./Ph.D. Student",
+      "startDate": "2023-09",
+      "summary": "Research on hyperspectral image generation and autonomous driving"
+    },
+    {
+      "name": "InBic AI",
+      "position": "AI Intern",
+      "startDate": "2023-01",
+      "endDate": "2023-03",
+      "summary": "AI edge device (Jetson) environment setup and operation experiments"
+    }
+  ],
   "projects": [],
   "publications": [
     {
