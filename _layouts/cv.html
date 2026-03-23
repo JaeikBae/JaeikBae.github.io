@@ -55,24 +55,51 @@ layout: default
 
 </div>
 {% else %}
-<div class="post">
+<div class="post cv-resume">
 
-  <header class="post-header">
-    {% if site.icon != blank %}
-    <div class="cv-favicon-icon">
-      {% if site.icon.size <= 4 %}
-        <span>{{ site.icon }}</span>
-      {% else %}
-        <img src="{{ site.icon | prepend: '/assets/img/' | relative_url }}" alt="icon">
+  <!-- Resume Header (print-friendly) -->
+  <header class="cv-resume-header">
+    <h1 class="cv-resume-name">{{ site.data.resume.basics.name }}</h1>
+    <div class="cv-resume-contact">
+      {% if site.data.resume.basics.major %}
+      <span class="cv-resume-contact-item">
+        <i class="fas fa-graduation-cap"></i> {{ site.data.resume.basics.major }}
+      </span>
+      {% endif %}
+      {% if site.data.resume.basics.email %}
+      <span class="cv-resume-contact-item">
+        <i class="fas fa-envelope"></i> <a href="mailto:{{ site.data.resume.basics.email }}">{{ site.data.resume.basics.email }}</a>
+      </span>
+      {% endif %}
+      {% if site.data.resume.basics.phone %}
+      <span class="cv-resume-contact-item">
+        <i class="fas fa-phone"></i> {{ site.data.resume.basics.phone }}
+      </span>
+      {% endif %}
+      {% if site.data.resume.basics.url %}
+      <span class="cv-resume-contact-item">
+        <i class="fas fa-globe"></i> <a href="{{ site.data.resume.basics.url }}">{{ site.data.resume.basics.url }}</a>
+      </span>
+      {% endif %}
+      {% if site.github_username %}
+      <span class="cv-resume-contact-item">
+        <i class="fab fa-github"></i> <a href="https://github.com/{{ site.github_username }}">{{ site.github_username }}</a>
+      </span>
+      {% endif %}
+      {% if site.scholar_userid %}
+      <span class="cv-resume-contact-item">
+        <i class="ai ai-google-scholar"></i> <a href="https://scholar.google.com/citations?user={{ site.scholar_userid }}">Google Scholar</a>
+      </span>
+      {% endif %}
+      {% if site.orcid_id %}
+      <span class="cv-resume-contact-item">
+        <i class="ai ai-orcid"></i> <a href="https://orcid.org/{{ site.orcid_id }}">{{ site.orcid_id }}</a>
+      </span>
       {% endif %}
     </div>
-    {% endif %}
-    <h1 class="post-title">{{ page.title }} {% if page.cv_pdf %}<a href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url}}" target="_blank" rel="noopener noreferrer" class="float-right"><i class="fas fa-file-pdf"></i></a>{% endif %}</h1>
-    {% if page.description %}<p class="post-description">{{ page.description }}</p>{% endif %}
-    <div class="clearfix"></div>
   </header>
 
-  <div class="cv-social">
+  <div class="cv-social no-print">
     <div class="cv-social-icons">
       {% include social.html %}
     </div>
@@ -83,20 +110,22 @@ layout: default
     {% endif %}
   </div>
 
-  <h4>Table of contents</h4>
-  <ul class="timeline">
-  {% for entry in site.data.resume %}
-    {% if site.jsonresume and site.jsonresume.size > 0 %}
-      {% unless site.jsonresume contains entry[0] %}
+  <div class="cv-toc no-print">
+    <h4>Table of contents</h4>
+    <ul class="timeline">
+    {% for entry in site.data.resume %}
+      {% if site.jsonresume and site.jsonresume.size > 0 %}
+        {% unless site.jsonresume contains entry[0] %}
+          {% continue %}
+        {% endunless %}
+      {% endif %}
+      {% if entry[0] == "meta" or entry[1].size == 0 %}
         {% continue %}
-      {% endunless %}
-    {% endif %}
-    {% if entry[0] == "meta" or entry[1].size == 0 %}
-      {% continue %}
-    {% endif %}
-    <li><a href="#{{ entry[0] }}"><span class="badge-toc">{{ entry[0] | capitalize }}</span></a></li>
-  {% endfor %}
-  </ul>
+      {% endif %}
+      <li><a href="#{{ entry[0] }}"><span class="badge-toc">{{ entry[0] | capitalize }}</span></a></li>
+    {% endfor %}
+    </ul>
+  </div>
 
   <article>
     <div class="cv">
@@ -109,13 +138,14 @@ layout: default
         {% if data[0] == "meta" or data[1].size == 0 %}
           {% continue %}
         {% endif %}
+        {% if data[0] == "basics" %}
+          {% continue %}
+        {% endif %}
         <a class="anchor" id="{{ data[0] }}"></a>
-        <div class="card mt-3 p-3">
-          <h3 class="card-title font-weight-medium">{{ data[0] | capitalize }}</h3>
+        <div class="card cv-section mt-3 p-3">
+          <h3 class="card-title cv-section-title font-weight-medium">{{ data[0] | capitalize }}</h3>
           <div>
           {% case data[0] %}
-            {% when "basics" %}
-              {% include resume/basics.html %}
             {% when "education" %}
               {% include resume/education.html %}
             {% when "work" %}
