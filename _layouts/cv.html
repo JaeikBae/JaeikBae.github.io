@@ -60,7 +60,7 @@ layout: default
   <!-- Resume Header (print-friendly) -->
   <header class="cv-resume-header">
     <h1 class="cv-resume-name">{{ site.data.resume.basics.name }}</h1>
-    <div class="cv-resume-contact">
+    <div class="cv-resume-contact cv-resume-contact-row1">
       {% if site.data.resume.basics.major %}
       <span class="cv-resume-contact-item">
         <i class="fas fa-graduation-cap"></i> {{ site.data.resume.basics.major }}
@@ -81,6 +81,8 @@ layout: default
         <i class="fas fa-globe"></i> <a href="{{ site.data.resume.basics.url }}">{{ site.data.resume.basics.url }}</a>
       </span>
       {% endif %}
+    </div>
+    <div class="cv-resume-contact cv-resume-contact-row2">
       {% if site.github_username %}
       <span class="cv-resume-contact-item">
         <i class="fab fa-github"></i> <a href="https://github.com/{{ site.github_username }}">{{ site.github_username }}</a>
@@ -88,7 +90,7 @@ layout: default
       {% endif %}
       {% if site.scholar_userid %}
       <span class="cv-resume-contact-item">
-        <i class="ai ai-google-scholar"></i> <a href="https://scholar.google.com/citations?user={{ site.scholar_userid }}">Google Scholar</a>
+        <i class="ai ai-google-scholar"></i> <a href="https://scholar.google.com/citations?user={{ site.scholar_userid }}">scholar.google.com/citations?user={{ site.scholar_userid }}</a>
       </span>
       {% endif %}
       {% if site.orcid_id %}
