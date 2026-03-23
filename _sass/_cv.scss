@@ -57,9 +57,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem 1.25rem;
+  gap: 0.25rem 1.25rem;
   font-size: 0.9rem;
   color: var(--global-text-color-light);
+}
+
+.cv-resume-contact-row1 {
+  padding-bottom: 0;
+}
+
+.cv-resume-contact-row2 {
   padding-bottom: 0.5rem;
 }
 
@@ -479,12 +486,20 @@ ul.timeline li::before {
   .cv-resume-contact {
     font-size: 9pt !important;
     color: #333 !important;
-    gap: 4pt 12pt;
+    gap: 2pt 12pt;
 
     a {
       color: #333 !important;
       text-decoration: none !important;
     }
+  }
+
+  .cv-resume-contact-row1 {
+    padding-bottom: 0 !important;
+  }
+
+  .cv-resume-contact-row2 {
+    padding-bottom: 4pt !important;
   }
 
   .cv-resume-contact-item i {
