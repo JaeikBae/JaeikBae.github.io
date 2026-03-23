@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://jaeikbae.github.io/pr-preview/pr-9/sitemap.xml
