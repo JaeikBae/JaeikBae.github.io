@@ -129,6 +129,42 @@
 }
 
 /*****************************
+ * CV Project Styles
+ *****************************/
+
+.cv-project-item {
+  page-break-inside: avoid;
+}
+
+.cv-project-name-en {
+  color: var(--global-text-color-light);
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.cv-project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-size: 0.82rem;
+  color: var(--global-text-color-light);
+  margin-bottom: 0.35rem;
+
+  i {
+    color: var(--global-theme-color);
+    font-size: 0.72rem;
+    margin-right: 0.2rem;
+  }
+}
+
+.cv-project-funder,
+.cv-project-role {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/*****************************
  * CV shared styles
  *****************************/
 
@@ -599,6 +635,29 @@ ul.timeline li::before {
       font-size: 8.5pt !important;
       line-height: 1.35 !important;
     }
+  }
+
+  // Project meta (funder, role)
+  .cv-project-name-en {
+    font-size: 8pt !important;
+    color: #555 !important;
+    margin-bottom: 1pt !important;
+  }
+
+  .cv-project-meta {
+    font-size: 7.5pt !important;
+    color: #555 !important;
+    gap: 1pt 8pt;
+    margin-bottom: 2pt !important;
+
+    i {
+      color: #666 !important;
+      font-size: 6.5pt !important;
+    }
+  }
+
+  .cv-project-item {
+    page-break-inside: avoid;
   }
 
   // Basics table (if still rendered somewhere)
