@@ -2,7 +2,8 @@
   "basics": {
     "name": "Jaeik Bae",
     "email": "jaeikb38@gm.gist.ac.kr",
-    "major": "Computer Science & Artificial Intelligence"
+    "major": "Computer Science & Artificial Intelligence",
+    "url": "https://jaeikbae.github.io"
   },
   "education": [
     {
@@ -36,7 +37,73 @@
       "summary": "AI edge device (Jetson) environment setup and operation experiments"
     }
   ],
-  "projects": [],
+  "projects": [
+    {
+      "name": "바이오 체화형 피지컬 AI 연구단",
+      "nameEn": "Bio-Embodied Physical AI Research Center",
+      "funder": "과학기술정보통신부 (MSIT)",
+      "role": "참여연구원 (Research Participant)",
+      "startDate": "2025-07",
+      "highlights": [
+        "Diffusion-based future prediction model development (디퓨전 기반 미래예측 모델 개발)"
+      ]
+    },
+    {
+      "name": "다종센서 정보를 활용한 딥러닝 기반 표적 탐지 및 추적기술 개발",
+      "nameEn": "Deep Learning-Based Target Detection and Tracking Using Multi-Sensor Information",
+      "funder": "국방과학연구소 (ADD)",
+      "role": "실무책임자 (Project Lead)",
+      "startDate": "2024-05",
+      "endDate": "2026-04",
+      "highlights": [
+        "Hyperspectral data collection and analysis (초분광 데이터 수집 및 분석)",
+        "Hyperspectral detection and generative model development (초분광 탐지 및 생성 모델 개발)"
+      ]
+    },
+    {
+      "name": "실도로 위험상황 시나리오 기반 시뮬레이션 데이터",
+      "nameEn": "Simulation Data Based on Real-Road Hazard Scenarios",
+      "funder": "한국지능정보사회진흥원 (NIA)",
+      "role": "실무책임자 (Project Lead)",
+      "startDate": "2024-06",
+      "endDate": "2024-12",
+      "highlights": [
+        "Vision-Language Model development and fine-tuning (VLM 개발 및 파인튜닝)"
+      ]
+    },
+    {
+      "name": "Low-Light Image Object Detection",
+      "funder": "Industry-Academia Project (BWI / Korea Photonics Technology Institute)",
+      "role": "Project Leader",
+      "startDate": "2024-09",
+      "endDate": "2025-12",
+      "highlights": [
+        "Low-light image data collection and labeling",
+        "Object detection model development and fine-tuning",
+        "On-device demonstration on Qualcomm RB5 board"
+      ]
+    },
+    {
+      "name": "Self-Photography Pose Recommendation System Using Pose Estimation and Object Recognition",
+      "funder": "Course Project",
+      "role": "Project Leader",
+      "startDate": "2024-09",
+      "endDate": "2025-12",
+      "highlights": [
+        "Full-stack web system development (React, Django, MariaDB)",
+        "AI model web-based deployment and real-time service"
+      ]
+    },
+    {
+      "name": "미래형자동차핵심기술전문인력양성",
+      "nameEn": "Future Automotive Core Technology Professional Training Program",
+      "funder": "한국산업기술진흥원 (KIAT)",
+      "role": "참여연구원 (Research Participant)",
+      "startDate": "2024-01",
+      "endDate": "2027-04",
+      "highlights": []
+    }
+  ],
   "publications": [
     {
       "name": "TDiff-HSI: Tucker-guided diffusion for high-dimensional RGB-to-HSI image generation",

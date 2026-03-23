@@ -1,8 +1,9 @@
 <ul class="card-text font-weight-light list-group list-group-flush">
-  {% for content in data[1] %}
-  <li class="list-group-item">
+  {% assign projects = data[1] | sort: 'startDate' | reverse %}
+  {% for content in projects %}
+  <li class="list-group-item cv-project-item">
     <div class="row">
-      <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
+      <div class="col-xs-2 cl-sm-2 col-md-auto text-center cv-date-col" style="min-width: 100px;">
         {% if content.startDate %}
         {% assign startDate = content.startDate | split: "-" | slice: 0,2 | join: "." %}
         {% assign endDate   = content.endDate   | split: "-" | slice: 0,2 | join: "." | default: "Present" %}
@@ -15,9 +16,29 @@
           {{ date }}
         </span>
       </div>
-      <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
-        <h6 class="title font-weight-bold ml-1 ml-md-4"><a href="{{ content.url }}">{{content.name}}</a></h6>
-        <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem; font-style: italic;">{{content.summary}}</h6>
+      <div class="col mt-2 mt-md-0">
+        <h6 class="title font-weight-bold ml-1 ml-md-4">
+          {% if content.url and content.url != "" %}
+            <a href="{{ content.url }}">{{content.name}}</a>
+          {% else %}
+            {{content.name}}
+          {% endif %}
+        </h6>
+        {% if content.nameEn and content.nameEn != "" %}
+        <h6 class="ml-1 ml-md-4 cv-project-name-en" style="font-size: 0.85rem;">{{content.nameEn}}</h6>
+        {% endif %}
+        <div class="ml-1 ml-md-4 cv-project-meta">
+          {% if content.funder and content.funder != "" %}
+          <span class="cv-project-funder"><i class="fas fa-building"></i> {{content.funder}}</span>
+          {% endif %}
+          {% if content.role and content.role != "" %}
+          <span class="cv-project-role"><i class="fas fa-user"></i> {{content.role}}</span>
+          {% endif %}
+        </div>
+        {% if content.summary and content.summary != "" %}
+        <h6 class="ml-1 ml-md-4 cv-area" style="font-size: 0.95rem; font-style: italic;">{{content.summary}}</h6>
+        {% endif %}
+        {% if content.highlights and content.highlights.size > 0 %}
         <ul class="items">
           {% for item in content.highlights %}
           <li>
@@ -25,6 +46,7 @@
           </li>
           {% endfor %}
         </ul>
+        {% endif %}
       </div>
     </div>
   </li>

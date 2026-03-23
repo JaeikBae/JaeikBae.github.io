@@ -1096,3 +1096,12 @@ nav[data-toggle="toc"] {
     padding-top: 0.5rem;
   }
 }
+
+@media print {
+  .navbar,
+  progress,
+  .progress-container,
+  .progress-bar {
+    display: none !important;
+  }
+}
