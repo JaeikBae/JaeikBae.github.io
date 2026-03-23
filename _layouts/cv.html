@@ -52,6 +52,17 @@ layout: default
     {% if page.description %}<p class="post-description">{{ page.description }}</p>{% endif %}
   </header>
 
+  <div class="cv-social">
+    <div class="cv-social-icons">
+      {% include social.html %}
+    </div>
+    {% if site.contact_note %}
+    <div class="cv-social-note">
+      {{ site.contact_note }}
+    </div>
+    {% endif %}
+  </div>
+
   <h4>Table of contents</h4>
   <ul class="timeline">
   {% for entry in site.data.resume %}
