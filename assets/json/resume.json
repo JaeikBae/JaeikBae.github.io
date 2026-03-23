@@ -52,7 +52,7 @@
       "releaseDate": "2025-11-14",
       "url": "https://xai.kaist.ac.kr/static/files/2025_hcai_workshop/paper_19.pdf",
       "summary": "Jaeik Bae, Yong-Gu Lee",
-      "abstract": ""
+      "abstract": "We introduce BISeg, a novel hyperspectral image (HSI) segmentation model that achieves both accuracy and interpretability through band-interval selection. Unlike conventional approaches that rely on post-hoc band attribution, BISeg intrinsically learns to identify compact spectral windows during training. Each interval is parameterized by its center wavelength and width, with a maximum of ten intervals activated. A dedicated regularization encourages the use of fewer and narrower intervals, ensuring explanations remain concise and physically meaningful. The proposed spectral\u2013spatial backbone integrates these intervals with spatial features via cross-axis attention, and a query-based head outputs pixel-level mask. Experiments on our custom HSI dataset, covering nine material classes, demonstrate that BISeg achieves competitive segmentation accuracy while producing interpretable spectral intervals aligned with known material properties."
     },
     {
       "name": "R2H-Diff: Spectral-wise Diffusion for Hyperspectral Image Reconstruction from RGB and Semantic Masks",
@@ -60,7 +60,7 @@
       "releaseDate": "2025-06-11",
       "url": "",
       "summary": "Jaeik Bae, Yong-Gu Lee",
-      "abstract": ""
+      "abstract": "We propose R2H-Diff, a diffusion-based model that reconstructs hyperspectral images (HSIs) using RGB images and semantic masks. Instead of generating the full spectrum at once, our model sequentially restores each spectral channel for greater training stability. A single-scene experiment validates its ability to denoise and reconstruct spectral data effectively."
     }
   ],
   "awards": []
