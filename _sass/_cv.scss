@@ -1,4 +1,25 @@
 /*****************************
+ * CV favicon icon
+ *****************************/
+
+.cv-favicon-icon {
+  text-align: center;
+  margin-bottom: 0.75rem;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  span {
+    font-size: 2rem;
+    line-height: 1;
+  }
+}
+
+/*****************************
  * CV shared styles
  *****************************/
 
