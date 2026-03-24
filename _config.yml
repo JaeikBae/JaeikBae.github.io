@@ -100,7 +100,7 @@ contact_note: >
 
 google_analytics:  # your Google Analytics measurement ID (format: G-XXXXXXXXXX)
 panelbear_analytics:  # panelbear analytics site ID (format: XXXXXXXXX)
-goatcounter:  # your GoatCounter code (e.g., mysite → mysite.goatcounter.com)
+goatcounter: jaeikb # your GoatCounter code (e.g., mysite → mysite.goatcounter.com)
 
 google_site_verification:  # your google-site-verification ID (Google Search Console)
 bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)
@@ -214,7 +214,7 @@ enable_medium_zoom:         true   # enables image zoom feature (as on medium.co
 enable_progressbar:         true   # enables a horizontal progress bar linked to the vertical scroll position
 
 # Admin dashboard settings
-admin_password_hash: "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9"  # SHA-256 hash of admin password (default: admin123, CHANGE THIS!)
+admin_password_hash: "a68eff2b8e3e3b4b673bac55029f9bbb367039efc858222b4b340d71b4e76787"
 
 # -----------------------------------------------------------------------------
 # Library versions
