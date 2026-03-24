@@ -98,4 +98,4 @@ let initTheme = (theme) => {
   setTheme(theme);
 };
 
-initTheme("dark");
+initTheme("light");
