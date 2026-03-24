@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  {% include metadata.html %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@{{ site.bootstrap.version }}/dist/css/bootstrap.min.css" rel="stylesheet" integrity="{{ site.bootstrap.integrity.css }}" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@{{ site.fontawesome.version }}/css/all.min.css" integrity="{{ site.fontawesome.integrity }}" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700">
+  {% if site.icon.size <= 4 %}
+  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{{ site.icon }}</text></svg>">
+  {% elsif site.icon != blank %}
+  <link rel="shortcut icon" href="{{ site.icon | prepend: '/assets/img/' | relative_url}}"/>
+  {% endif %}
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --bg-card-hover: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #334155;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .login-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .login-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    .login-box p {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .login-box .form-control {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .login-box .form-control:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      outline: none;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .btn-login {
+      width: 100%;
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 1rem;
+    }
+
+    .btn-login:hover { background: var(--accent-light); }
+
+    .login-error {
+      color: var(--danger);
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    /* Dashboard */
+    .dashboard { display: none; }
+    .dashboard.active { display: block; }
+
+    .dash-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .dash-header h1 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dash-header h1 i { color: var(--accent); }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .btn-logout:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .dash-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .refresh-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .refresh-bar .last-updated {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .btn-refresh {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-refresh:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-refresh.loading i { animation: spin 1s linear infinite; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    .stat-card:hover {
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card .stat-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-card .stat-icon {
+      float: right;
+      font-size: 1.5rem;
+      color: var(--accent);
+      opacity: 0.7;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-header h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-header h3 i { color: var(--accent); font-size: 0.9rem; }
+
+    .panel-body { padding: 1.25rem; }
+
+    .chart-container {
+      width: 100%;
+      height: 250px;
+      position: relative;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 200px;
+      padding-top: 1rem;
+    }
+
+    .bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar {
+      width: 100%;
+      max-width: 40px;
+      background: var(--accent);
+      border-radius: 4px 4px 0 0;
+      min-height: 2px;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .bar:hover {
+      background: var(--accent-light);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .bar-tooltip {
+      display: none;
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .bar:hover .bar-tooltip { display: block; }
+
+    .bar-label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .page-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .page-table th {
+      text-align: left;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .page-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .page-table tr:last-child td { border-bottom: none; }
+
+    .page-table tr:hover td { background: rgba(59, 130, 246, 0.05); }
+
+    .page-table .path {
+      color: var(--text-primary);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    .page-table .count {
+      text-align: right;
+      font-weight: 600;
+      color: var(--accent-light);
+    }
+
+    .referrer-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+    }
+
+    .referrer-item:last-child { border-bottom: none; }
+
+    .referrer-name {
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      max-width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .referrer-count {
+      color: var(--accent-light);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+      .dash-content { padding: 1rem; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+
+    .empty-state i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      opacity: 0.5;
+    }
+
+    .empty-state p { font-size: 0.95rem; }
+
+    .setup-guide {
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .setup-guide h3 {
+      color: var(--accent-light);
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .setup-guide ol {
+      color: var(--text-secondary);
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .setup-guide code {
+      background: var(--bg-primary);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--accent-light);
+    }
+
+    .period-selector {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .period-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .period-btn.active, .period-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .loading-spinner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+    }
+
+    .loading-spinner i {
+      font-size: 2rem;
+      color: var(--accent);
+      animation: spin 1s linear infinite;
+    }
+
+    .visit-log {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .visit-log::-webkit-scrollbar { width: 6px; }
+    .visit-log::-webkit-scrollbar-track { background: transparent; }
+    .visit-log::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="loginScreen" class="login-container">
+    <div class="login-box">
+      <h2><i class="fas fa-chart-line" style="color: var(--accent);"></i> Admin</h2>
+      <p>Enter password to access the dashboard</p>
+      <form id="loginForm" onsubmit="return handleLogin(event)">
+        <input type="password" id="passwordInput" class="form-control" placeholder="Password" autocomplete="current-password" autofocus>
+        <button type="submit" class="btn-login">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+      </form>
+      <div id="loginError" class="login-error">
+        <i class="fas fa-exclamation-circle"></i> Incorrect password
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="dashboard">
+    <div class="dash-header">
+      <h1><i class="fas fa-chart-line"></i> Analytics Dashboard</h1>
+      <div style="display:flex;gap:0.75rem;align-items:center;">
+        <a href="{{ '/' | relative_url }}" style="color:var(--text-secondary);text-decoration:none;font-size:0.85rem;">
+          <i class="fas fa-arrow-left"></i> Back to site
+        </a>
+        <button class="btn-logout" onclick="handleLogout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+
+    <div class="dash-content">
+      {% if site.enable_goatcounter and site.goatcounter %}
+
+      <div class="refresh-bar">
+        <span class="last-updated" id="lastUpdated">Loading...</span>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <div class="period-selector">
+            <button class="period-btn active" data-period="week" onclick="changePeriod('week', this)">7D</button>
+            <button class="period-btn" data-period="month" onclick="changePeriod('month', this)">30D</button>
+            <button class="period-btn" data-period="year" onclick="changePeriod('year', this)">1Y</button>
+          </div>
+          <button class="btn-refresh" id="refreshBtn" onclick="refreshData()">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Overview -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <i class="fas fa-eye stat-icon"></i>
+          <div class="stat-label">Total Pageviews</div>
+          <div class="stat-value" id="totalViews">-</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-users stat-icon"></i>
+          <div class="stat-label">Total Visits</div>
+          <div class="stat-value" id="totalVisits">-</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-calendar-day stat-icon"></i>
+          <div class="stat-label">Today</div>
+          <div class="stat-value" id="todayViews">-</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-file-alt stat-icon"></i>
+          <div class="stat-label">Pages Tracked</div>
+          <div class="stat-value" id="totalPages">-</div>
+        </div>
+      </div>
+
+      <!-- Daily Chart -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3><i class="fas fa-chart-bar"></i> Visitor Trend</h3>
+        </div>
+        <div class="panel-body">
+          <div class="chart-container">
+            <div class="bar-chart" id="dailyChart"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <!-- Top Pages -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3><i class="fas fa-file-alt"></i> Top Pages</h3>
+          </div>
+          <div class="panel-body" style="padding:0;">
+            <div id="topPages" class="visit-log">
+              <div class="loading-spinner"><i class="fas fa-spinner"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Referrers -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3><i class="fas fa-external-link-alt"></i> Top Referrers</h3>
+          </div>
+          <div class="panel-body">
+            <div id="topReferrers">
+              <div class="loading-spinner"><i class="fas fa-spinner"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <!-- Browsers -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3><i class="fas fa-globe"></i> Browsers</h3>
+          </div>
+          <div class="panel-body">
+            <div id="browserStats">
+              <div class="loading-spinner"><i class="fas fa-spinner"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Systems -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3><i class="fas fa-desktop"></i> Operating Systems</h3>
+          </div>
+          <div class="panel-body">
+            <div id="systemStats">
+              <div class="loading-spinner"><i class="fas fa-spinner"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GoatCounter Link -->
+      <div style="text-align:center;padding:1rem;color:var(--text-muted);font-size:0.8rem;">
+        Full analytics at
+        <a href="https://{{ site.goatcounter }}.goatcounter.com" target="_blank" rel="noopener"
+           style="color:var(--accent);">
+          {{ site.goatcounter }}.goatcounter.com
+        </a>
+      </div>
+
+      {% else %}
+
+      <div class="setup-guide">
+        <h3><i class="fas fa-info-circle"></i> GoatCounter Setup Required</h3>
+        <ol>
+          <li>Sign up at <a href="https://www.goatcounter.com" target="_blank" rel="noopener" style="color:var(--accent-light);">goatcounter.com</a> (free for personal use)</li>
+          <li>Set your <code>goatcounter</code> code in <code>_config.yml</code> (e.g., <code>mysite</code>)</li>
+          <li>Set <code>enable_goatcounter: true</code> in <code>_config.yml</code></li>
+          <li>Rebuild and deploy your site</li>
+        </ol>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body">
+          <div class="empty-state">
+            <i class="fas fa-chart-area"></i>
+            <p>GoatCounter is not configured yet.<br>Follow the setup guide above to start tracking visitors.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h3><i class="fas fa-server"></i> Built-in Page Hit Counter (No GoatCounter)</h3>
+        </div>
+        <div class="panel-body">
+          <div id="localStats">
+            <div class="empty-state">
+              <i class="fas fa-database"></i>
+              <p>Local page view tracking is active regardless of GoatCounter configuration.<br>
+                 This uses <code>localStorage</code> and only tracks visits from the current browser.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    const HASH = '{{ site.admin_password_hash }}';
+    const GC_CODE = '{{ site.goatcounter }}';
+    const GC_ENABLED = {{ site.enable_goatcounter | default: false }};
+    const SESSION_KEY = '_admin_session';
+    const SESSION_DURATION = 3600000; // 1 hour
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function checkSession() {
+      try {
+        const session = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+        if (session && session.hash === HASH && (Date.now() - session.ts) < SESSION_DURATION) {
+          return true;
+        }
+      } catch(e) {}
+      return false;
+    }
+
+    function setSession() {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ hash: HASH, ts: Date.now() }));
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const pw = document.getElementById('passwordInput').value;
+      const hash = await sha256(pw);
+      if (hash === HASH) {
+        setSession();
+        showDashboard();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        setTimeout(() => {
+          document.getElementById('loginError').style.display = 'none';
+        }, 3000);
+      }
+      return false;
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem(SESSION_KEY);
+      document.getElementById('dashboard').classList.remove('active');
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('passwordInput').value = '';
+      document.getElementById('passwordInput').focus();
+    }
+
+    function showDashboard() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      if (GC_ENABLED && GC_CODE) {
+        refreshData();
+      }
+    }
+
+    if (checkSession()) { showDashboard(); }
+
+    let currentPeriod = 'week';
+
+    function changePeriod(period, btn) {
+      currentPeriod = period;
+      document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      refreshData();
+    }
+
+    function periodToDays(period) {
+      switch(period) {
+        case 'week': return 7;
+        case 'month': return 30;
+        case 'year': return 365;
+        default: return 7;
+      }
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      const month = (d.getMonth() + 1).toString().padStart(2, '0');
+      const day = d.getDate().toString().padStart(2, '0');
+      return month + '/' + day;
+    }
+
+    async function gcFetch(endpoint) {
+      const url = 'https://' + GC_CODE + '.goatcounter.com' + endpoint;
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error('API error: ' + resp.status);
+      return resp.json();
+    }
+
+    async function refreshData() {
+      const btn = document.getElementById('refreshBtn');
+      btn.classList.add('loading');
+
+      try {
+        const days = periodToDays(currentPeriod);
+        const end = new Date();
+        const start = new Date();
+        start.setDate(start.getDate() - days);
+
+        const startStr = start.toISOString().split('T')[0];
+        const endStr = end.toISOString().split('T')[0];
+
+        const counterURL = 'https://' + GC_CODE + '.goatcounter.com/counter/';
+
+        let totalPageviews = 0;
+        let todayPageviews = 0;
+
+        const pagesData = await gcFetch('/api/v0/stats/total?start=' + startStr + '&end=' + endStr);
+
+        if (pagesData) {
+          if (pagesData.total !== undefined) totalPageviews = pagesData.total;
+          if (pagesData.total_utc !== undefined) totalPageviews = pagesData.total_utc;
+        }
+
+        document.getElementById('totalViews').textContent = totalPageviews.toLocaleString();
+        document.getElementById('totalVisits').textContent = totalPageviews.toLocaleString();
+
+        let hitsData;
+        try {
+          hitsData = await gcFetch('/api/v0/stats/hits?start=' + startStr + '&end=' + endStr + '&daily=true');
+        } catch(e) {
+          hitsData = null;
+        }
+
+        if (hitsData && hitsData.hits) {
+          const pages = hitsData.hits;
+          document.getElementById('totalPages').textContent = pages.length;
+
+          let dailyTotals = {};
+          pages.forEach(page => {
+            if (page.stats) {
+              page.stats.forEach(stat => {
+                if (!dailyTotals[stat.day]) dailyTotals[stat.day] = 0;
+                dailyTotals[stat.day] += stat.daily || 0;
+              });
+            }
+          });
+
+          const today = endStr;
+          todayPageviews = dailyTotals[today] || 0;
+          document.getElementById('todayViews').textContent = todayPageviews.toLocaleString();
+
+          renderBarChart(dailyTotals, days);
+
+          pages.sort((a, b) => (b.count || 0) - (a.count || 0));
+          renderTopPages(pages.slice(0, 15));
+        } else {
+          document.getElementById('totalPages').textContent = '-';
+          document.getElementById('todayViews').textContent = '-';
+          document.getElementById('dailyChart').innerHTML = '<div class="empty-state"><p>No hit data available</p></div>';
+          document.getElementById('topPages').innerHTML = '<div class="empty-state" style="padding:1.5rem;"><p>No data</p></div>';
+        }
+
+        let browserData, systemData, refData;
+        try {
+          browserData = await gcFetch('/api/v0/stats/browsers?start=' + startStr + '&end=' + endStr + '&limit=8');
+        } catch(e) { browserData = null; }
+        try {
+          systemData = await gcFetch('/api/v0/stats/systems?start=' + startStr + '&end=' + endStr + '&limit=8');
+        } catch(e) { systemData = null; }
+        try {
+          refData = await gcFetch('/api/v0/stats/hits?start=' + startStr + '&end=' + endStr + '&filter=ref');
+        } catch(e) { refData = null; }
+
+        renderReferrerList('browserStats', browserData);
+        renderReferrerList('systemStats', systemData);
+
+        if (refData && refData.hits) {
+          const refs = refData.hits.sort((a,b) => (b.count||0)-(a.count||0)).slice(0, 10);
+          const container = document.getElementById('topReferrers');
+          if (refs.length === 0) {
+            container.innerHTML = '<div class="empty-state" style="padding:1rem;"><p>No referrer data</p></div>';
+          } else {
+            container.innerHTML = refs.map(r =>
+              '<div class="referrer-item">' +
+                '<span class="referrer-name">' + escapeHtml(r.name || r.path || 'Direct') + '</span>' +
+                '<span class="referrer-count">' + (r.count || 0).toLocaleString() + '</span>' +
+              '</div>'
+            ).join('');
+          }
+        } else {
+          document.getElementById('topReferrers').innerHTML = '<div class="empty-state" style="padding:1rem;"><p>No referrer data</p></div>';
+        }
+
+        document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+
+      } catch(err) {
+        console.error('Analytics fetch error:', err);
+        document.getElementById('lastUpdated').textContent = 'Error loading data. Make sure GoatCounter API is accessible.';
+      }
+
+      btn.classList.remove('loading');
+    }
+
+    function renderBarChart(dailyTotals, days) {
+      const chart = document.getElementById('dailyChart');
+      const dates = [];
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        dates.push(d.toISOString().split('T')[0]);
+      }
+
+      const values = dates.map(d => dailyTotals[d] || 0);
+      const maxVal = Math.max(...values, 1);
+
+      let showEvery = 1;
+      if (days > 60) showEvery = 7;
+      else if (days > 14) showEvery = 3;
+
+      chart.innerHTML = dates.map((date, i) => {
+        const val = values[i];
+        const height = Math.max((val / maxVal) * 180, 2);
+        const showLabel = i % showEvery === 0 || i === dates.length - 1;
+        return '<div class="bar-wrapper">' +
+          '<div class="bar" style="height:' + height + 'px">' +
+            '<div class="bar-tooltip">' + formatDate(date) + ': ' + val + ' views</div>' +
+          '</div>' +
+          (showLabel ? '<div class="bar-label">' + formatDate(date) + '</div>' : '<div class="bar-label">&nbsp;</div>') +
+        '</div>';
+      }).join('');
+    }
+
+    function renderTopPages(pages) {
+      const container = document.getElementById('topPages');
+      if (!pages || pages.length === 0) {
+        container.innerHTML = '<div class="empty-state" style="padding:1.5rem;"><p>No page data</p></div>';
+        return;
+      }
+      container.innerHTML =
+        '<table class="page-table"><thead><tr><th>Page</th><th style="text-align:right">Views</th></tr></thead><tbody>' +
+        pages.map(p =>
+          '<tr><td class="path">' + escapeHtml(p.path || p.name || '/') + '</td>' +
+          '<td class="count">' + (p.count || 0).toLocaleString() + '</td></tr>'
+        ).join('') +
+        '</tbody></table>';
+    }
+
+    function renderReferrerList(containerId, data) {
+      const container = document.getElementById(containerId);
+      if (!data || (!data.stats && !data.browsers && !data.systems)) {
+        container.innerHTML = '<div class="empty-state" style="padding:1rem;"><p>No data available</p></div>';
+        return;
+      }
+      const items = data.stats || data.browsers || data.systems || [];
+      if (items.length === 0) {
+        container.innerHTML = '<div class="empty-state" style="padding:1rem;"><p>No data</p></div>';
+        return;
+      }
+      container.innerHTML = items.map(item =>
+        '<div class="referrer-item">' +
+          '<span class="referrer-name">' + escapeHtml(item.name || item.browser || item.system || 'Unknown') + '</span>' +
+          '<span class="referrer-count">' + (item.count || 0).toLocaleString() + '</span>' +
+        '</div>'
+      ).join('');
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
