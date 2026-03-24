@@ -1105,3 +1105,282 @@ nav[data-toggle="toc"] {
     display: none !important;
   }
 }
+
+// Publications page
+.publications {
+  .pub-year {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--global-theme-color);
+    border-bottom: 2px solid var(--global-theme-color);
+    padding-bottom: 0.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .pub-entry {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--global-divider-color);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .pub-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+
+    a {
+      color: var(--global-text-color);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--global-theme-color);
+      }
+    }
+  }
+
+  .pub-authors {
+    font-size: 0.9rem;
+    color: var(--global-text-color-light);
+    font-style: italic;
+    margin-bottom: 0.2rem;
+  }
+
+  .pub-venue {
+    font-size: 0.9rem;
+    color: var(--global-text-color-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .pub-abstract-toggle {
+    margin-bottom: 0.5rem;
+
+    summary {
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--global-theme-color);
+      font-weight: 500;
+      user-select: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      i {
+        transition: transform 0.2s;
+        margin-right: 0.3rem;
+      }
+    }
+
+    &[open] summary i {
+      transform: rotate(90deg);
+    }
+  }
+
+  .pub-abstract-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--global-text-color-light);
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--global-code-bg-color);
+    border-left: 3px solid var(--global-theme-color);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .pub-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+
+    .btn {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--global-theme-color);
+      color: var(--global-theme-color);
+      background: transparent;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+
+      &:hover {
+        background: var(--global-theme-color);
+        color: var(--global-hover-text-color);
+      }
+
+      i {
+        margin-right: 0.2rem;
+      }
+    }
+  }
+}
+
+// Projects portfolio page
+.projects-portfolio {
+  .project-card {
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+  }
+
+  .project-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .project-img-placeholder {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--global-code-bg-color);
+    border-bottom: 1px solid var(--global-divider-color);
+    font-size: 2.5rem;
+    color: var(--global-theme-color);
+    opacity: 0.5;
+  }
+
+  .project-body {
+    padding: 1.25rem;
+  }
+
+  .project-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--global-text-color);
+  }
+
+  .project-period {
+    font-size: 0.8rem;
+    color: var(--global-text-color-light);
+    margin-bottom: 0.5rem;
+
+    i {
+      color: var(--global-theme-color);
+      margin-right: 0.2rem;
+    }
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--global-text-color-light);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    background: var(--global-code-bg-color);
+    color: var(--global-theme-color);
+    font-weight: 500;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    a {
+      font-size: 0.8rem;
+      color: var(--global-theme-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .project-funder {
+    font-size: 0.8rem;
+    color: var(--global-text-color-light);
+    margin-bottom: 0.5rem;
+
+    i {
+      color: var(--global-theme-color);
+      margin-right: 0.2rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  .project-highlights {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0.75rem;
+
+    li {
+      font-size: 0.85rem;
+      color: var(--global-text-color-light);
+      padding: 0.15rem 0;
+      padding-left: 1rem;
+      position: relative;
+
+      &::before {
+        content: "▸";
+        color: var(--global-theme-color);
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+}
+
+// CV PDF download button
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--global-theme-color);
+  color: var(--global-hover-text-color) !important;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+    text-decoration: none !important;
+    color: var(--global-hover-text-color) !important;
+  }
+
+  i {
+    font-size: 1rem;
+    color: inherit !important;
+  }
+}

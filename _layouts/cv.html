@@ -110,6 +110,16 @@ layout: default
       {{ site.contact_note }}
     </div>
     {% endif %}
+    <div style="text-align:center;margin-top:1rem;">
+      {% if page.cv_pdf and page.cv_pdf != "" %}
+        <a href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}" class="cv-download-btn" target="_blank" rel="noopener">
+          <i class="fas fa-file-pdf"></i> Download CV (PDF)
+        </a>
+      {% endif %}
+      <button class="cv-download-btn" onclick="window.print()" style="margin-left:0.5rem;">
+        <i class="fas fa-print"></i> Print / Save as PDF
+      </button>
+    </div>
   </div>
 
   <div class="cv-toc no-print">
