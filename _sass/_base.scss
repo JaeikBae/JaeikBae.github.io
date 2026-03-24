@@ -1239,60 +1239,57 @@ nav[data-toggle="toc"] {
     }
   }
 
-  .project-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid var(--global-divider-color);
-  }
-
-  .project-img-placeholder {
-    width: 100%;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--global-code-bg-color);
-    border-bottom: 1px solid var(--global-divider-color);
-    font-size: 2.5rem;
-    color: var(--global-theme-color);
-    opacity: 0.5;
-  }
-
   .project-body {
-    padding: 1.25rem;
+    padding: 1.5rem;
   }
 
   .project-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
     color: var(--global-text-color);
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--global-theme-color);
   }
 
-  .project-period {
-    font-size: 0.8rem;
-    color: var(--global-text-color-light);
-    margin-bottom: 0.5rem;
+  .project-divider {
+    border: none;
+    border-top: 1px solid var(--global-divider-color);
+    margin: 0.6rem 0;
+  }
 
-    i {
-      color: var(--global-theme-color);
-      margin-right: 0.2rem;
+  .project-info-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+
+    &--highlights {
+      align-items: flex-start;
     }
   }
 
-  .project-desc {
-    font-size: 0.9rem;
-    color: var(--global-text-color-light);
-    line-height: 1.5;
-    margin-bottom: 0.75rem;
+  .project-info-label {
+    flex-shrink: 0;
+    width: 80px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--global-theme-color);
+  }
+
+  .project-info-value {
+    color: var(--global-text-color);
+    flex: 1;
   }
 
   .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
-    margin-bottom: 0.75rem;
   }
 
   .project-tag {
@@ -1307,10 +1304,10 @@ nav[data-toggle="toc"] {
   .project-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem;
 
     a {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--global-theme-color);
       text-decoration: none;
       display: inline-flex;
@@ -1323,26 +1320,15 @@ nav[data-toggle="toc"] {
     }
   }
 
-  .project-funder {
-    font-size: 0.8rem;
-    color: var(--global-text-color-light);
-    margin-bottom: 0.5rem;
-
-    i {
-      color: var(--global-theme-color);
-      margin-right: 0.2rem;
-      font-size: 0.75rem;
-    }
-  }
-
   .project-highlights {
     list-style: none;
     padding-left: 0;
-    margin-bottom: 0.75rem;
+    margin: 0;
+    flex: 1;
 
     li {
       font-size: 0.85rem;
-      color: var(--global-text-color-light);
+      color: var(--global-text-color);
       padding: 0.15rem 0;
       padding-left: 1rem;
       position: relative;
