@@ -198,7 +198,7 @@ imagemagick:
 
 enable_google_analytics:    false  # enables google analytics
 enable_panelbear_analytics: false  # enables panelbear analytics
-enable_goatcounter:         false  # enables GoatCounter analytics (privacy-friendly)
+enable_goatcounter:         true  # enables GoatCounter analytics (privacy-friendly)
 enable_google_verification: false  # enables google site verification
 enable_bing_verification:   false  # enables bing site verification
 enable_masonry:             false  # enables automatic project cards arrangement
