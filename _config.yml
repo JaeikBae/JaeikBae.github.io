@@ -214,7 +214,7 @@ enable_medium_zoom:         true   # enables image zoom feature (as on medium.co
 enable_progressbar:         true   # enables a horizontal progress bar linked to the vertical scroll position
 
 # Admin dashboard settings
-admin_password_hash: "a68eff2b8e3e3b4b673bac55029f9bbb367039efc858222b4b340d71b4e76787"
+admin_password_hash: "157dadaad2bd64740ad99247318bfcd371ff2afc0cee9d6ee005beaf862103dc"
 
 # -----------------------------------------------------------------------------
 # Library versions
