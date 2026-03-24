@@ -59,16 +59,6 @@ layout: default
 
   <!-- Resume Header (print-friendly) -->
   <header class="cv-resume-header">
-    <div class="cv-header-actions no-print">
-      {% if page.cv_pdf and page.cv_pdf != "" %}
-        <a href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}" class="cv-action-btn" target="_blank" rel="noopener" title="Download CV (PDF)">
-          <i class="fas fa-file-pdf"></i>
-        </a>
-      {% endif %}
-      <button class="cv-action-btn" onclick="window.print()" title="Print / Save as PDF">
-        <i class="fas fa-print"></i>
-      </button>
-    </div>
     <h1 class="cv-resume-name">{{ site.data.resume.basics.name }}</h1>
     <div class="cv-resume-contact cv-resume-contact-row1">
       {% if site.data.resume.basics.major %}

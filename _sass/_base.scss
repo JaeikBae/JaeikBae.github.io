@@ -1343,39 +1343,25 @@ nav[data-toggle="toc"] {
   }
 }
 
-// CV header action buttons (print, PDF download)
-.cv-header-actions {
-  position: absolute;
-  top: 1rem;
-  right: 0;
+// Navbar print button
+.nav-print-btn {
   display: flex;
-  gap: 0.4rem;
-}
-
-.cv-action-btn {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  background: transparent;
-  color: var(--global-text-color-light);
-  border: 1px solid var(--global-divider-color);
-  border-radius: 6px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-decoration: none !important;
-  padding: 0;
+  padding: 0 0.5rem;
 
-  &:hover {
-    color: var(--global-theme-color);
-    border-color: var(--global-theme-color);
-    background: var(--global-code-bg-color);
-    text-decoration: none !important;
-  }
+  button {
+    background: transparent;
+    border: none;
+    color: var(--global-text-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    opacity: 0.6;
+    transition: opacity 0.2s, color 0.2s;
 
-  i {
-    color: inherit !important;
+    &:hover {
+      opacity: 1;
+      color: var(--global-theme-color);
+    }
   }
 }
