@@ -743,9 +743,9 @@
       }
     }
 
-    if (checkSession()) { showDashboard(); }
-
     let currentPeriod = 'week';
+
+    if (checkSession()) { showDashboard(); }
 
     function changePeriod(period, btn) {
       currentPeriod = period;
@@ -792,27 +792,10 @@
         const startStr = start.toISOString().split('T')[0];
         const endStr = end.toISOString().split('T')[0];
 
-        const counterURL = 'https://' + GC_CODE + '.goatcounter.com/counter/';
-
         let totalPageviews = 0;
         let todayPageviews = 0;
 
-        const pagesData = await gcFetch('/api/v0/stats/total?start=' + startStr + '&end=' + endStr);
-
-        if (pagesData) {
-          if (pagesData.total !== undefined) totalPageviews = pagesData.total;
-          if (pagesData.total_utc !== undefined) totalPageviews = pagesData.total_utc;
-        }
-
-        document.getElementById('totalViews').textContent = totalPageviews.toLocaleString();
-        document.getElementById('totalVisits').textContent = totalPageviews.toLocaleString();
-
-        let hitsData;
-        try {
-          hitsData = await gcFetch('/api/v0/stats/hits?start=' + startStr + '&end=' + endStr + '&daily=true');
-        } catch(e) {
-          hitsData = null;
-        }
+        const hitsData = await gcFetch('/api/v0/stats/hits?start=' + startStr + '&end=' + endStr + '&daily=true');
 
         if (hitsData && hitsData.hits) {
           const pages = hitsData.hits;
@@ -820,6 +803,7 @@
 
           let dailyTotals = {};
           pages.forEach(page => {
+            totalPageviews += page.count || 0;
             if (page.stats) {
               page.stats.forEach(stat => {
                 if (!dailyTotals[stat.day]) dailyTotals[stat.day] = 0;
@@ -828,8 +812,9 @@
             }
           });
 
-          const today = endStr;
-          todayPageviews = dailyTotals[today] || 0;
+          todayPageviews = dailyTotals[endStr] || 0;
+          document.getElementById('totalViews').textContent = totalPageviews.toLocaleString();
+          document.getElementById('totalVisits').textContent = totalPageviews.toLocaleString();
           document.getElementById('todayViews').textContent = todayPageviews.toLocaleString();
 
           renderBarChart(dailyTotals, days);
@@ -837,6 +822,8 @@
           pages.sort((a, b) => (b.count || 0) - (a.count || 0));
           renderTopPages(pages.slice(0, 15));
         } else {
+          document.getElementById('totalViews').textContent = '-';
+          document.getElementById('totalVisits').textContent = '-';
           document.getElementById('totalPages').textContent = '-';
           document.getElementById('todayViews').textContent = '-';
           document.getElementById('dailyChart').innerHTML = '<div class="empty-state"><p>No hit data available</p></div>';
@@ -851,21 +838,21 @@
           systemData = await gcFetch('/api/v0/stats/systems?start=' + startStr + '&end=' + endStr + '&limit=8');
         } catch(e) { systemData = null; }
         try {
-          refData = await gcFetch('/api/v0/stats/hits?start=' + startStr + '&end=' + endStr + '&filter=ref');
+          refData = await gcFetch('/api/v0/stats/refs?start=' + startStr + '&end=' + endStr + '&limit=10');
         } catch(e) { refData = null; }
 
         renderReferrerList('browserStats', browserData);
         renderReferrerList('systemStats', systemData);
 
-        if (refData && refData.hits) {
-          const refs = refData.hits.sort((a,b) => (b.count||0)-(a.count||0)).slice(0, 10);
+        if (refData && refData.refs) {
+          const refs = refData.refs.slice(0, 10);
           const container = document.getElementById('topReferrers');
           if (refs.length === 0) {
             container.innerHTML = '<div class="empty-state" style="padding:1rem;"><p>No referrer data</p></div>';
           } else {
             container.innerHTML = refs.map(r =>
               '<div class="referrer-item">' +
-                '<span class="referrer-name">' + escapeHtml(r.name || r.path || 'Direct') + '</span>' +
+                '<span class="referrer-name">' + escapeHtml(r.name || 'Direct') + '</span>' +
                 '<span class="referrer-count">' + (r.count || 0).toLocaleString() + '</span>' +
               '</div>'
             ).join('');
