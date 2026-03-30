@@ -685,6 +685,7 @@
     const HASH = '{{ site.admin_password_hash }}';
     const GC_CODE = '{{ site.goatcounter }}';
     const GC_ENABLED = {{ site.enable_goatcounter | default: false }};
+    const GC_TOKEN = '{{ site.goatcounter_api_token }}';
     const SESSION_KEY = '_admin_session';
     const SESSION_DURATION = 3600000; // 1 hour
 
@@ -771,7 +772,9 @@
 
     async function gcFetch(endpoint) {
       const url = 'https://' + GC_CODE + '.goatcounter.com' + endpoint;
-      const resp = await fetch(url);
+      const headers = {};
+      if (GC_TOKEN) headers['Authorization'] = 'Bearer ' + GC_TOKEN;
+      const resp = await fetch(url, { headers });
       if (!resp.ok) throw new Error('API error: ' + resp.status);
       return resp.json();
     }
@@ -875,7 +878,10 @@
 
       } catch(err) {
         console.error('Analytics fetch error:', err);
-        document.getElementById('lastUpdated').textContent = 'Error loading data. Make sure GoatCounter API is accessible.';
+        const msg = GC_TOKEN
+          ? 'Error loading data: ' + err.message
+          : 'Error: GoatCounter API token is not set. Add goatcounter_api_token to _config.yml.';
+        document.getElementById('lastUpdated').textContent = msg;
       }
 
       btn.classList.remove('loading');
