@@ -3,7 +3,7 @@
     {% for content in publications %}
     <li class="list-group-item cv-pub-item">
       <div class="row cv-pub-row">
-        <div class="col-xs-2 cl-sm-2 col-md-auto text-center cv-date-col" style="min-width: 100px;">
+        <div class="col-xs-2 cl-sm-2 col-md-auto text-center cv-date-col" style="min-width: 130px;">
             {% if content.releaseDate %}
             {% assign dateParts = content.releaseDate | split: "-" %}
             {% assign date = dateParts[0] | append: "." | append: dateParts[1] %}
@@ -19,6 +19,11 @@
               </tr>
             </tbody>
           </table>
+          {% if content.image and content.image != "" %}
+          <a class="cv-pub-image" href="{% if content.url and content.url != '' %}{{ content.url }}{% else %}{{ content.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ content.name }}">
+            <img src="{{ content.image | relative_url }}" alt="{{ content.name }} preview" loading="lazy">
+          </a>
+          {% endif %}
         </div>
         <div class="col cv-pub-content mt-2 mt-md-0">
           <h6 class="title font-weight-bold ml-1 ml-md-4">
@@ -30,16 +35,9 @@
           </h6>
           <h6 class="ml-1 ml-md-4 cv-publisher" style="font-size: 0.95rem;">{{content.publisher}}</h6>
           <h6 class="ml-1 ml-md-4 cv-authors" style="font-size: 0.95rem; font-style: italic;">{{content.summary}}</h6>
-          {% if content.abstract and content.abstract != "" or content.image and content.image != "" %}
+          {% if content.abstract and content.abstract != "" %}
           <div class="cv-pub-detail ml-1 ml-md-4">
-            {% if content.abstract and content.abstract != "" %}
             <p class="pub-abstract">{{content.abstract}}</p>
-            {% endif %}
-            {% if content.image and content.image != "" %}
-            <a class="cv-pub-image" href="{% if content.url and content.url != '' %}{{ content.url }}{% else %}{{ content.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ content.name }}">
-              <img src="{{ content.image | relative_url }}" alt="{{ content.name }} preview" loading="lazy">
-            </a>
-            {% endif %}
           </div>
           {% endif %}
         </div>
