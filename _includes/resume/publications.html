@@ -3,7 +3,7 @@
     {% for content in publications %}
     <li class="list-group-item cv-pub-item">
       <div class="row cv-pub-row">
-        <div class="col-xs-2 cl-sm-2 col-md-auto text-center cv-date-col" style="min-width: 130px;">
+        <div class="col-xs-2 cl-sm-2 col-md-auto text-center cv-date-col" style="min-width: 170px;">
             {% if content.releaseDate %}
             {% assign dateParts = content.releaseDate | split: "-" %}
             {% assign date = dateParts[0] | append: "." | append: dateParts[1] %}

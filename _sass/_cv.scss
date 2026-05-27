@@ -139,10 +139,10 @@
 
 .cv-pub-image {
   display: block;
-  width: 112px;
-  max-width: 112px;
-  height: 78px;
-  max-height: 78px;
+  width: 150px;
+  max-width: 150px;
+  height: 105px;
+  max-height: 105px;
   margin: 0.8rem auto 0;
   border: 1px solid var(--global-divider-color);
   border-radius: 5px;
@@ -153,8 +153,8 @@
     display: block;
     width: 100%;
     height: 100%;
-    max-width: 112px;
-    max-height: 78px;
+    max-width: 150px;
+    max-height: 105px;
     object-fit: contain;
   }
 }
@@ -228,14 +228,14 @@ p.pub-abstract {
 
 @media (max-width: 768px) {
   .cv-pub-image {
-    width: 96px;
-    max-width: 96px;
-    height: 68px;
-    max-height: 68px;
+    width: 110px;
+    max-width: 110px;
+    height: 78px;
+    max-height: 78px;
 
     img {
-      max-width: 96px;
-      max-height: 68px;
+      max-width: 110px;
+      max-height: 78px;
     }
   }
 }
