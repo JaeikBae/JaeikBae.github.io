@@ -129,14 +129,14 @@
 }
 
 .cv-pub-date {
-  width: 360px;
-  text-align: center;
+  width: 100%;
+  text-align: left;
   margin-bottom: 0.5rem;
 }
 
 .cv-pub-main {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 2rem;
 }
 
@@ -177,7 +177,7 @@
 .cv-pub-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   flex: 1 1 auto;
   min-width: 0;
 }

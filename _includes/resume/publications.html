@@ -11,15 +11,15 @@
       <div class="cv-pub-date">
         <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">{{date}}</span>
       </div>
-      <div class="cv-pub-main">
-        <div class="cv-pub-visual">
+      <div class="cv-pub-main" style="display: flex; align-items: flex-start; gap: 2rem;">
+        <div class="cv-pub-visual" style="flex: 0 0 360px;">
           {% if content.image and content.image != "" %}
           <a class="cv-pub-image" href="{% if content.url and content.url != '' %}{{ content.url }}{% else %}{{ content.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ content.name }}">
             <img src="{{ content.image | relative_url }}" alt="{{ content.name }} preview" loading="lazy">
           </a>
           {% endif %}
         </div>
-        <div class="cv-pub-content">
+        <div class="cv-pub-content" style="display: flex; flex-direction: column; justify-content: flex-start; flex: 1 1 auto; min-width: 0;">
           <h6 class="title font-weight-bold">
             {% if content.url and content.url != "" %}
               <a href="{{ content.url }}">{{content.name}}</a>
