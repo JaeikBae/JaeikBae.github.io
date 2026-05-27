@@ -21,6 +21,11 @@ nav_order: 1
   {% endif %}
 
 <div class="pub-entry">
+  {% if pub.image and pub.image != "" %}
+  <a class="pub-image" href="{% if pub.url and pub.url != '' %}{{ pub.url }}{% else %}{{ pub.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ pub.name }}">
+    <img src="{{ pub.image | relative_url }}" alt="{{ pub.name }} preview" loading="lazy">
+  </a>
+  {% endif %}
   <div class="pub-content">
     <div class="pub-title">
       {% if pub.url and pub.url != "" %}

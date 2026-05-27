@@ -1123,12 +1123,37 @@ nav[data-toggle="toc"] {
   }
 
   .pub-entry {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
     padding: 1rem 0;
     border-bottom: 1px solid var(--global-divider-color);
 
     &:last-child {
       border-bottom: none;
     }
+  }
+
+  .pub-image {
+    flex: 0 0 180px;
+    width: 180px;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+  }
+
+  .pub-content {
+    min-width: 0;
+    flex: 1 1 auto;
   }
 
   .pub-title {
@@ -1219,6 +1244,19 @@ nav[data-toggle="toc"] {
       i {
         margin-right: 0.2rem;
       }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .pub-entry {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .pub-image {
+      width: 100%;
+      flex-basis: auto;
+      aspect-ratio: 16 / 9;
     }
   }
 }
