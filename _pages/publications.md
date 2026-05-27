@@ -36,6 +36,9 @@ nav_order: 1
     </div>
     <div class="pub-authors">{{ pub.summary }}</div>
     <div class="pub-venue">{{ pub.publisher }}</div>
+    {% if pub.metrics and pub.metrics != "" %}
+    <div class="pub-metrics">{{ pub.metrics }}</div>
+    {% endif %}
     {% if pub.abstract and pub.abstract != "" %}
     <details class="pub-abstract-toggle">
       <summary><i class="fas fa-caret-right"></i> Abstract</summary>
