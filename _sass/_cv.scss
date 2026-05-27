@@ -129,7 +129,7 @@
 }
 
 .cv-pub-row {
-  align-items: flex-start;
+  align-items: flex-end;
   flex-wrap: nowrap;
 }
 
@@ -138,7 +138,11 @@
 }
 
 .cv-pub-detail {
-  margin-top: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.cv-pub-abstract-full {
+  width: 100%;
 }
 
 .cv-pub-image {
