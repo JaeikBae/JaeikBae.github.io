@@ -2,42 +2,36 @@
     {% assign publications = data[1] | sort: 'releaseDate' | reverse %}
     {% for content in publications %}
     <li class="list-group-item cv-pub-item">
-      <div class="row cv-pub-row">
-        <div class="col-xs-2 cl-sm-2 col-md-auto text-center cv-date-col cv-pub-date-col">
-            {% if content.releaseDate %}
-            {% assign dateParts = content.releaseDate | split: "-" %}
-            {% assign date = dateParts[0] | append: "." | append: dateParts[1] %}
-            {% else %}
-            {% assign date = "" %}
-            {% endif %}
-          <table class="table-cv">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">{{date}}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      {% if content.releaseDate %}
+      {% assign dateParts = content.releaseDate | split: "-" %}
+      {% assign date = dateParts[0] | append: "." | append: dateParts[1] %}
+      {% else %}
+      {% assign date = "" %}
+      {% endif %}
+      <div class="cv-pub-date">
+        <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">{{date}}</span>
+      </div>
+      <div class="cv-pub-main">
+        <div class="cv-pub-visual">
           {% if content.image and content.image != "" %}
           <a class="cv-pub-image" href="{% if content.url and content.url != '' %}{{ content.url }}{% else %}{{ content.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ content.name }}">
             <img src="{{ content.image | relative_url }}" alt="{{ content.name }} preview" loading="lazy">
           </a>
           {% endif %}
         </div>
-        <div class="col cv-pub-content mt-2 mt-md-0">
-          <h6 class="title font-weight-bold ml-1 ml-md-4">
+        <div class="cv-pub-content">
+          <h6 class="title font-weight-bold">
             {% if content.url and content.url != "" %}
               <a href="{{ content.url }}">{{content.name}}</a>
             {% else %}
               {{content.name}}
             {% endif %}
           </h6>
-          <h6 class="ml-1 ml-md-4 cv-publisher" style="font-size: 0.95rem;">{{content.publisher}}</h6>
+          <h6 class="cv-publisher" style="font-size: 0.95rem;">{{content.publisher}}</h6>
           {% if content.metrics and content.metrics != "" %}
-          <h6 class="ml-1 ml-md-4 cv-pub-metrics">{{content.metrics}}</h6>
+          <h6 class="cv-pub-metrics">{{content.metrics}}</h6>
           {% endif %}
-          <h6 class="ml-1 ml-md-4 cv-authors" style="font-size: 0.95rem; font-style: italic;">{{content.summary}}</h6>
+          <h6 class="cv-authors" style="font-size: 0.95rem; font-style: italic;">{{content.summary}}</h6>
         </div>
       </div>
       {% if content.abstract and content.abstract != "" %}

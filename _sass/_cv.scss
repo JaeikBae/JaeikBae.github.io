@@ -128,13 +128,20 @@
   page-break-inside: avoid;
 }
 
-.cv-pub-row {
-  align-items: stretch;
-  flex-wrap: nowrap;
+.cv-pub-date {
+  width: 360px;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
-.cv-pub-date-col {
-  min-width: 360px;
+.cv-pub-main {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.cv-pub-visual {
+  flex: 0 0 360px;
 }
 
 .cv-pub-detail {
@@ -151,7 +158,7 @@
   max-width: 330px;
   height: 230px;
   max-height: 230px;
-  margin: 0.8rem auto 0;
+  margin: 0 auto;
   border: 1px solid var(--global-divider-color);
   border-radius: 5px;
   overflow: hidden;
@@ -171,6 +178,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  flex: 1 1 auto;
   min-width: 0;
 }
 
@@ -245,8 +253,16 @@ p.pub-abstract {
 }
 
 @media (max-width: 768px) {
-  .cv-pub-date-col {
-    min-width: 130px;
+  .cv-pub-date {
+    width: 130px;
+  }
+
+  .cv-pub-main {
+    gap: 1rem;
+  }
+
+  .cv-pub-visual {
+    flex-basis: 130px;
   }
 
   .cv-pub-image {
