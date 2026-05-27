@@ -38,13 +38,13 @@
           <h6 class="ml-1 ml-md-4 cv-pub-metrics">{{content.metrics}}</h6>
           {% endif %}
           <h6 class="ml-1 ml-md-4 cv-authors" style="font-size: 0.95rem; font-style: italic;">{{content.summary}}</h6>
+          {% if content.abstract and content.abstract != "" %}
+          <div class="cv-pub-detail ml-1 ml-md-4">
+            <p class="pub-abstract">{{content.abstract}}</p>
+          </div>
+          {% endif %}
         </div>
       </div>
-      {% if content.abstract and content.abstract != "" %}
-      <div class="cv-pub-detail cv-pub-abstract-full">
-        <p class="pub-abstract">{{content.abstract}}</p>
-      </div>
-      {% endif %}
     </li>
     {% endfor %}
   </ul>
