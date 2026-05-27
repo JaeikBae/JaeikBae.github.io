@@ -129,7 +129,7 @@
 }
 
 .cv-pub-row {
-  align-items: flex-end;
+  align-items: stretch;
   flex-wrap: nowrap;
 }
 
@@ -168,6 +168,9 @@
 }
 
 .cv-pub-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   min-width: 0;
 }
 
