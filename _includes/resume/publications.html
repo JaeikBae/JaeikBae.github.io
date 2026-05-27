@@ -20,11 +20,6 @@
             </tbody>
           </table>
         </div>
-        {% if content.image and content.image != "" %}
-        <a class="cv-pub-image" href="{% if content.url and content.url != '' %}{{ content.url }}{% else %}{{ content.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ content.name }}">
-          <img src="{{ content.image | relative_url }}" alt="{{ content.name }} preview" loading="lazy">
-        </a>
-        {% endif %}
         <div class="col cv-pub-content mt-2 mt-md-0">
           <h6 class="title font-weight-bold ml-1 ml-md-4">
             {% if content.url and content.url != "" %}
@@ -35,8 +30,17 @@
           </h6>
           <h6 class="ml-1 ml-md-4 cv-publisher" style="font-size: 0.95rem;">{{content.publisher}}</h6>
           <h6 class="ml-1 ml-md-4 cv-authors" style="font-size: 0.95rem; font-style: italic;">{{content.summary}}</h6>
-          {% if content.abstract and content.abstract != "" %}
-          <p class="pub-abstract ml-1 ml-md-4">{{content.abstract}}</p>
+          {% if content.abstract and content.abstract != "" or content.image and content.image != "" %}
+          <div class="cv-pub-detail ml-1 ml-md-4">
+            {% if content.abstract and content.abstract != "" %}
+            <p class="pub-abstract">{{content.abstract}}</p>
+            {% endif %}
+            {% if content.image and content.image != "" %}
+            <a class="cv-pub-image" href="{% if content.url and content.url != '' %}{{ content.url }}{% else %}{{ content.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ content.name }}">
+              <img src="{{ content.image | relative_url }}" alt="{{ content.name }} preview" loading="lazy">
+            </a>
+            {% endif %}
+          </div>
           {% endif %}
         </div>
       </div>
