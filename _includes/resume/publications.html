@@ -2,7 +2,7 @@
     {% assign publications = data[1] | sort: 'releaseDate' | reverse %}
     {% for content in publications %}
     <li class="list-group-item cv-pub-item">
-      <div class="row">
+      <div class="row cv-pub-row">
         <div class="col-xs-2 cl-sm-2 col-md-auto text-center cv-date-col" style="min-width: 100px;">
             {% if content.releaseDate %}
             {% assign dateParts = content.releaseDate | split: "-" %}
@@ -20,7 +20,12 @@
             </tbody>
           </table>
         </div>
-        <div class="col mt-2 mt-md-0">
+        {% if content.image and content.image != "" %}
+        <a class="cv-pub-image" href="{% if content.url and content.url != '' %}{{ content.url }}{% else %}{{ content.image | relative_url }}{% endif %}" target="_blank" rel="noopener" aria-label="{{ content.name }}">
+          <img src="{{ content.image | relative_url }}" alt="{{ content.name }} preview" loading="lazy">
+        </a>
+        {% endif %}
+        <div class="col cv-pub-content mt-2 mt-md-0">
           <h6 class="title font-weight-bold ml-1 ml-md-4">
             {% if content.url and content.url != "" %}
               <a href="{{ content.url }}">{{content.name}}</a>
